@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: report-card-generator
+    env: python
+    plan: starter
+    autoDeploy: true
+    buildCommand: pip install -r django_app/requirements.txt
+    startCommand: gunicorn config.wsgi --chdir django_app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: 'report-card-generator.onrender.com'
+      - key: SECRET_KEY
+        generateValue: true
