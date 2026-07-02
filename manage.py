@@ -7,8 +7,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 DJANGO_APP_DIR = BASE_DIR / "django_app"
 
-if str(DJANGO_APP_DIR) not in sys.path:
-    sys.path.insert(0, str(DJANGO_APP_DIR))
+# Ensure the project root is on sys.path first so root-level `config` and apps
+# are preferred over `django_app` copies. This prevents shadowing during
+# collectstatic and runtime on Render.
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 
 def main():
