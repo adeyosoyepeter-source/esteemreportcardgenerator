@@ -102,9 +102,9 @@ Your Excel file needs these columns:
 
 1. Add your app to Render as a Python web service
 2. Set the build command:
-   - `pip install -r requirements.txt`
+   - `pip install -r requirements.txt` (auto-detected from root)
 3. Set the start command:
-   - `gunicorn config.wsgi --chdir django_app --bind 0.0.0.0:$PORT`
+   - `gunicorn config.wsgi --chdir django_app --bind 0.0.0.0:$PORT` (or use Procfile)
 4. Add environment variables:
    - `SECRET_KEY`
    - `DEBUG=False`

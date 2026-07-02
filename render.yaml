@@ -4,7 +4,7 @@ services:
     env: python
     plan: starter
     autoDeploy: true
-    buildCommand: pip install -r django_app/requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn config.wsgi --chdir django_app --bind 0.0.0.0:$PORT
     envVars:
       - key: DEBUG
