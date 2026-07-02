@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi --pythonpath django_app
+web: gunicorn config.wsgi

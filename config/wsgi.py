@@ -6,10 +6,13 @@ import os
 import sys
 from pathlib import Path
 
-# Add django_app to path so config module can be found from anywhere
-django_app_dir = Path(__file__).resolve().parent.parent
-if str(django_app_dir) not in sys.path:
-    sys.path.insert(0, str(django_app_dir))
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DJANGO_APP_DIR = ROOT_DIR / 'django_app'
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+if str(DJANGO_APP_DIR) not in sys.path:
+    sys.path.insert(0, str(DJANGO_APP_DIR))
 
 from django.core.wsgi import get_wsgi_application
 
