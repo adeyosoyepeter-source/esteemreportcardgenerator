@@ -1,1 +1,1 @@
-web: bash start.sh
+web: gunicorn config.wsgi --pythonpath django_app
