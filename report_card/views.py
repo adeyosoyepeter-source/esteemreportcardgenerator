@@ -1,11 +1,16 @@
 import json
+import logging
 import tempfile
+import traceback
+from django.conf import settings
 from django.shortcuts import render
 from django.http import JsonResponse, FileResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from .forms import BroadsheetUploadForm
 from .utils import read_broadsheet, generate_pdf_bytes, sanitize_filename, apply_report_metadata, build_pdf_filename
+
+logger = logging.getLogger(__name__)
 
 
 def _get_request_session(request):
@@ -92,9 +97,13 @@ def upload_broadsheet(request):
         })
 
     except Exception as e:
+        logger.exception('Upload broadsheet failed')
+        error_message = str(e)
+        if settings.DEBUG:
+            error_message = f'{error_message} | {traceback.format_exc()}'
         return JsonResponse({
             'success': False,
-            'error': f'Error processing file: {str(e)}'
+            'error': f'Error processing file: {error_message}'
         }, status=500)
 
 
