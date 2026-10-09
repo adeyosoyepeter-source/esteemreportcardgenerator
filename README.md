@@ -57,9 +57,9 @@ When deploying this repository from its root directory, use:
 - **Build command:** `pip install -r django_app/requirements-prod.txt && python manage.py collectstatic --noinput`
 - **Start command:** `gunicorn --chdir django_app config.wsgi:application`
 
-The Django `config` package is inside `django_app/`, so Gunicorn must change to
-that directory before importing the WSGI application. The root `Procfile`
-contains the same start command.
+The Django `config` package is inside `django_app/`. The root `Procfile` uses
+`--chdir django_app`; a root compatibility package also supports existing
+Render services that still run `gunicorn config.wsgi`.
 
 ## 📚 Documentation
 

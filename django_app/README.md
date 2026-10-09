@@ -138,7 +138,9 @@ For a Render service whose root directory is the repository root, use:
 - **Start command:** `gunicorn --chdir django_app config.wsgi:application`
 
 The `config` package is nested in `django_app/`; the `--chdir` option ensures
-Gunicorn can import it when the service starts from the repository root.
+Gunicorn can import it when the service starts from the repository root. A
+root compatibility package also supports services still using
+`gunicorn config.wsgi`.
 
 ## Grade Thresholds
 
