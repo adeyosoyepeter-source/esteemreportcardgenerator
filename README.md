@@ -50,6 +50,17 @@ Then open your browser to: **http://127.0.0.1:8000**
 Generated report cards use `report_card_gabriel_promise-1.pdf` as their page
 template. Keep that PDF in the project root when generating report cards.
 
+## Render Deployment
+
+When deploying this repository from its root directory, use:
+
+- **Build command:** `pip install -r django_app/requirements-prod.txt && python manage.py collectstatic --noinput`
+- **Start command:** `gunicorn --chdir django_app config.wsgi:application`
+
+The Django `config` package is inside `django_app/`, so Gunicorn must change to
+that directory before importing the WSGI application. The root `Procfile`
+contains the same start command.
+
 ## 📚 Documentation
 
 See [django_app/README.md](django_app/README.md) for:

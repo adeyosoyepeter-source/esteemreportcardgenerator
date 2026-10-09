@@ -130,6 +130,16 @@ Keep it at the project root when running the Django app or desktop generator.
 Reports with more than 13 subjects extend the matching table rows and page,
 moving the total and grading information below the completed table.
 
+### Render Deployment
+
+For a Render service whose root directory is the repository root, use:
+
+- **Build command:** `pip install -r django_app/requirements-prod.txt && python manage.py collectstatic --noinput`
+- **Start command:** `gunicorn --chdir django_app config.wsgi:application`
+
+The `config` package is nested in `django_app/`; the `--chdir` option ensures
+Gunicorn can import it when the service starts from the repository root.
+
 ## Grade Thresholds
 
 Default grade scale (customizable in settings):
